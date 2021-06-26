@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "hotels"
+version = "0.1.0"
+description = ""
+authors = ["Vadim Ryazanov <vadimvoronezh@yandex.ru>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+Django = "^3.2.4"
+django-micro = "^1.8.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.4"
+pytest-django = "^4.4.0"
+factory-boy = "^3.2.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
