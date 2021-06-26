@@ -2,7 +2,9 @@ import datetime
 
 import django
 import django.conf
+import django.contrib.auth
 import django.db
+import django.utils.timezone
 import django_micro
 
 
@@ -59,6 +61,16 @@ def dislike(hotel_id: int):
     hotel = Hotel.objects.get(pk=hotel_id)
     hotel.dislikes = django.db.models.F('dislikes') + 1
     hotel.save(update_fields=('dislikes',))
+
+
+def get_users_living_in(hotel: str):
+    today = django.utils.timezone.now().date()
+
+    return django.contrib.auth.get_user_model().objects.filter(
+        reservations__room__hotel__title=hotel,
+        reservations__start__lte=today,
+        reservations__end__gt=today,
+    )
 
 
 def get_rooms(move_in: datetime.date, move_out: datetime.date):

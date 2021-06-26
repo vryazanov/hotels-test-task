@@ -59,13 +59,7 @@ def test_get_users_living_in_marylend():
         end=today - datetime.timedelta(days=3),
     )
 
-    queryset = django.contrib.auth.models.User.objects.filter(
-        reservations__room__hotel__title='Maryland',
-        reservations__start__lte=today,
-        reservations__end__gte=today,
-    )
-
-    assert queryset.get() == user_1
+    assert app.get_users_living_in('Maryland').get() == user_1
 
 
 @pytest.mark.django_db
